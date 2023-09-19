@@ -68,7 +68,6 @@ namespace ex28
                 Console.Write(bar + ']');
                 Console.WriteLine(nameOfBar);
             }
-
         }
     }
 
