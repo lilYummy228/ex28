@@ -12,12 +12,14 @@ namespace ex28
         {
             int maxValue = 100;
             int minValue = 0;
-            GetValue("HealthPoints", minValue, maxValue, 0, ConsoleColor.Green);
-            GetValue("ManaPoints", minValue, maxValue, 1, ConsoleColor.DarkBlue);
-            GetValue("EnergyPoints", minValue, maxValue, 2, ConsoleColor.DarkRed);
+            GetValue("HealthPoints", 0, ConsoleColor.Green);
+            GetValue("ManaPoints", 1, ConsoleColor.DarkBlue);
+            GetValue("EnergyPoints", 2, ConsoleColor.DarkRed);
         }
-        static void GetValue(string value, int minValue, int maxValue, int position, ConsoleColor colour)
+        static void GetValue(string value, int position, ConsoleColor colour)
         {
+            int maxValue = 100;
+            int minValue = 0;
             Console.Write($"{value}: ");
             int enteredValue = Convert.ToInt32(Console.ReadLine());
 
@@ -25,8 +27,7 @@ namespace ex28
             {
                 enteredValue = maxValue;
             }
-
-            if (enteredValue < minValue)
+            else if (enteredValue < minValue)
             {
                 enteredValue = minValue;
             }
