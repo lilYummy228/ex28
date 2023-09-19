@@ -10,15 +10,13 @@ namespace ex28
     {
         static void Main(string[] args)
         {
-            int maxValue = 100;
-            int minValue = 0;
             GetValue("HealthPoints", 0, ConsoleColor.Green);
             GetValue("ManaPoints", 1, ConsoleColor.DarkBlue);
             GetValue("EnergyPoints", 2, ConsoleColor.DarkRed);
         }
         static void GetValue(string value, int position, ConsoleColor colour)
         {
-            int maxValue = 100;
+            int maxValue = 100; 
             int minValue = 0;
             Console.Write($"{value}: ");
             int enteredValue = Convert.ToInt32(Console.ReadLine());
