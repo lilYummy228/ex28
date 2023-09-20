@@ -10,64 +10,79 @@ namespace ex28
     {
         static void Main(string[] args)
         {
-            GetValue("HealthPoints", 0, ConsoleColor.Green);
-            GetValue("ManaPoints", 1, ConsoleColor.DarkBlue);
-            GetValue("EnergyPoints", 2, ConsoleColor.DarkRed);
+            GetValue("HealthPoints", 0, ConsoleColor.Green, 5);
+
+            GetValue("ManaPoints", 1, ConsoleColor.DarkBlue, 7);
+
+            GetValue("EnergyPoints", 2, ConsoleColor.DarkRed, 9);
         }
-        static void GetValue(string value, int position, ConsoleColor colour)
+        static void GetValue(string nameOfBar, int position, ConsoleColor colour, int positionOfText)
         {
-            int maxValue = 100; 
+            Console.SetCursorPosition(0, positionOfText);
+            Console.Write($"Введите максимальное значение {nameOfBar}: ");
+            float maxValue = Convert.ToInt32(Console.ReadLine());
+            Console.Write($"Текущее значение {nameOfBar} в %: ");
+            float enteredPercent = Convert.ToInt32(Console.ReadLine());
             int minValue = 0;
-            Console.Write($"{value}: ");
-            int enteredValue = Convert.ToInt32(Console.ReadLine());
+            int maxPercent = 100;
 
-            if (enteredValue > maxValue)
+            if (enteredPercent > maxPercent)
             {
-                enteredValue = maxValue;
+                enteredPercent = maxPercent;
             }
-            else if (enteredValue < minValue)
+            else if(enteredPercent < minValue)
             {
-                enteredValue = minValue;
+                enteredPercent = minValue;
             }
 
-            DrawBar(enteredValue, maxValue, colour, position, value);
+            float value = maxValue / maxPercent * enteredPercent;
+
+            DrawBar(value, maxValue, colour, position, nameOfBar);
         }
 
-        static void DrawBar(int value, int maxValue, ConsoleColor colour, int position, string nameOfBar)
+        static void DrawBar(float value, float maxValue, ConsoleColor colour, int position, string nameOfBar)
         {
+            char startBorder = '[';
+            char finalBorder = ']';
             ConsoleColor defaultColor = Console.ForegroundColor;
-            string bar = "";
 
-            for (int i = 0; i < value; i++)
-            {
-                bar += "#";
-            }
+            string bar = FillBar(0, value);
 
             Console.SetCursorPosition(0, position);
             Console.ForegroundColor = colour;
-            Console.Write('[');
+            Console.Write(startBorder);
             Console.Write(bar);
             Console.ForegroundColor = defaultColor;
-            bar = "";
 
-            for (int i = value; i < maxValue; i++)
-            {
-                bar += "#";
-            }
+            bar = FillBar(value, maxValue);
 
             if (value == maxValue)
             {
                 Console.ForegroundColor = colour;
-                Console.Write(bar + ']');
-                Console.ForegroundColor = defaultColor;
+                Console.Write(bar + finalBorder);
                 Console.WriteLine(nameOfBar);
+                Console.ForegroundColor = defaultColor;
             }
             else
             {
-                Console.Write(bar + ']');
+                Console.Write(bar + finalBorder);
+                Console.ForegroundColor = colour;
                 Console.WriteLine(nameOfBar);
+                Console.ForegroundColor = defaultColor;
             }
         }
-    }
 
+        static string FillBar(float startValue, float finalValue)
+        {
+            string bar = null;
+            char filledSymbol = '#';
+
+            for (float i = startValue; i < finalValue; i++)
+            {
+                bar += filledSymbol;
+            }
+
+            return bar;
+        }
+    }
 }
