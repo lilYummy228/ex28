@@ -30,7 +30,7 @@ namespace ex28
             {
                 enteredPercent = maxPercent;
             }
-            else if(enteredPercent < minValue)
+            else if (enteredPercent < minValue)
             {
                 enteredPercent = minValue;
             }
