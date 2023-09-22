@@ -10,13 +10,13 @@ namespace ex28
     {
         static void Main(string[] args)
         {
-            GetValue("HealthPoints", 0, ConsoleColor.Green, 5);
+            DrawFilledBar("HealthPoints", 0, ConsoleColor.Green, 5);
 
-            GetValue("ManaPoints", 1, ConsoleColor.DarkBlue, 7);
+            DrawFilledBar("ManaPoints", 1, ConsoleColor.DarkBlue, 7);
 
-            GetValue("EnergyPoints", 2, ConsoleColor.DarkRed, 9);
+            DrawFilledBar("EnergyPoints", 2, ConsoleColor.DarkRed, 9);
         }
-        static void GetValue(string nameOfBar, int position, ConsoleColor colour, int positionOfText)
+        static void DrawFilledBar(string nameOfBar, int position, ConsoleColor colour, int positionOfText)
         {
             Console.SetCursorPosition(0, positionOfText);
             Console.Write($"Введите максимальное значение {nameOfBar}: ");
@@ -37,10 +37,10 @@ namespace ex28
 
             float value = maxValue / maxPercent * enteredPercent;
 
-            DrawBar(value, maxValue, colour, position, nameOfBar);
+            CreateBar(value, maxValue, colour, position, nameOfBar);
         }
 
-        static void DrawBar(float value, float maxValue, ConsoleColor colour, int position, string nameOfBar)
+        static void CreateBar(float value, float maxValue, ConsoleColor colour, int position, string nameOfBar)
         {
             char startBorder = '[';
             char finalBorder = ']';
@@ -56,20 +56,10 @@ namespace ex28
 
             bar = FillBar(value, maxValue);
 
-            if (value == maxValue)
-            {
-                Console.ForegroundColor = colour;
-                Console.Write(bar + finalBorder);
-                Console.WriteLine(nameOfBar);
-                Console.ForegroundColor = defaultColor;
-            }
-            else
-            {
-                Console.Write(bar + finalBorder);
-                Console.ForegroundColor = colour;
-                Console.WriteLine(nameOfBar);
-                Console.ForegroundColor = defaultColor;
-            }
+            Console.Write(bar);
+            Console.ForegroundColor = colour;
+            Console.Write(finalBorder + nameOfBar);
+            Console.ForegroundColor = defaultColor;
         }
 
         static string FillBar(float startValue, float finalValue)
