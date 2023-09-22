@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ex28
 {
@@ -16,6 +12,7 @@ namespace ex28
 
             DrawFilledBar("EnergyPoints", 2, ConsoleColor.DarkRed, 9);
         }
+
         static void DrawFilledBar(string nameOfBar, int position, ConsoleColor colour, int positionOfText)
         {
             Console.SetCursorPosition(0, positionOfText);
